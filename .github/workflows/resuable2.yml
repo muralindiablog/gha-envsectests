@@ -1,4 +1,4 @@
-name: Reusable deploy
+name: Reusable output deploy
 on: 
   workflow_call:
     inputs: 
@@ -10,9 +10,14 @@ on:
     # secrets:
     #   some-secrets:
     #     required: false
-
+    outputs: 
+      result:
+        description: "The results fo deployment"
+        value: ${{ jobs.deploy.outputs.outcome }}
 jobs:
   deploy:
+    outputs:
+      outcome: ${{ steps.set-result.outputs.step-result }}
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -24,3 +29,8 @@ jobs:
       - name: Output information
         run: |
           echo "This is a test reuse workflow"
+    # For output demo test
+      - name: set result output
+        id: set-result
+        run: |
+          echo "step-result=success" >> $GITHUB_OUTPUT
