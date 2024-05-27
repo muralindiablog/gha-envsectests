@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - gha-exec-cond
-  workflow_dispatch:
 jobs:
   lint:
     runs-on: ubuntu-latest
