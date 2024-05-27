@@ -82,3 +82,8 @@ jobs:
     needs: [lint, deploy]
     if: failure()
     runs-on: ubuntu-latest
+    steps:
+      - name: output information
+        run: |
+          echo "something went wrong"
+          echo "${{ toJSON(github) }}"
